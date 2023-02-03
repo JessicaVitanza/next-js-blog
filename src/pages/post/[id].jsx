@@ -2,8 +2,9 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import styles from "@/styles/dPost.module.scss";
 import Link from "next/link";
+import Image from 'next/image';
 
-export default function () {
+export default function Post () {
   const router = useRouter();
   let { id } = router.query;
 
@@ -20,7 +21,9 @@ export default function () {
   return (
     <div className={styles.dPost}>
       <Link href={`/`}>
-      <img src={postData.image} alt={postData.title} />
+      <Image src={postData.image}
+            width={400} 
+            height={300} alt={postData.title} />
       <h1>{postData?.title}</h1>
       <p>{postData?.body}</p>
       </Link>
