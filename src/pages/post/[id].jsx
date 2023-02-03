@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import styles from "@/styles/dPost.module.scss";
+import styles from "../../styles/dPost.module.scss";
 import Link from "next/link";
 import Image from 'next/image';
 
@@ -12,7 +12,7 @@ export default function Post () {
 
   useEffect(() => { 
     if (router.isReady) 
-    fetch(`https://dummyjson.com/users/${id}`) 
+    fetch(`https://dummyjson.com/posts/${id}`) 
     .then(res => res.json()) 
     .then(data => setPostData(data)) 
   }, [router.isReady])
@@ -21,9 +21,13 @@ export default function Post () {
   return (
     <div className={styles.dPost}>
       <Link href={`/`}>
-      <Image src={postData.image}
-            width={400} 
-            height={300} alt={postData.title} />
+      <Image
+          src={`https://picsum.photos/800/600/?${id}`}
+          alt={postData?.title}
+          width={500}
+          height={400}
+          priority
+        />
       <h1>{postData?.title}</h1>
       <p>{postData?.body}</p>
       </Link>
